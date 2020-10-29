@@ -38,6 +38,10 @@ body {
   margin-top: 0;
   margin-bottom: 0;
 }
+.login-header:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
 
 /* The triangle form is achieved by a CSS hack */
 .login-triangle {
