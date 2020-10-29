@@ -1,7 +1,7 @@
 ---
 spring:
   profiles:
-    active: dev
+    active: shaobin
 ---
 server:
   port: 8082
@@ -13,5 +13,65 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
-  profiles: dev
+  profiles: shaobin
+---
+server:
+  port: 8082
+spring:
+  datasource:
+    username: wen
+    password: 12345
+    url: jdbc:mysql://localhost:3306/MapleTravel?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+  profiles: wen
+---
+server:
+  port: 8082
+spring:
+  datasource:
+    username: 66AB
+    password: 1999422
+    url: jdbc:mysql://localhost:3306/MapleTravel?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+  profiles: yuxuan
+---
+server:
+  port: 8080
+spring:
+  datasource:
+    username: yli875
+    password: root
+    url: jdbc:mysql://localhost:3306/MapleTravel?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+  profiles: liyue
+---
+server:
+  port: 8082
+spring:
+  datasource:
+    username: root
+    password: Hk27848
+    url: jdbc:mysql://localhost:3306/MapleTravel?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+  profiles: yimiao
+---
+server:
+  port: 8082
+spring:
+  datasource:
+    username: ZHOU JIA HUI
+    password: a88675577
+    url: jdbc:mysql://localhost:3306/MapleTravel?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+  profiles: shaobin
 ---

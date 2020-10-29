@@ -13,8 +13,8 @@ public class Application {
     DataBaseDao dataBaseDao;
     public static void main(String[] args) {
         ApplicationContext app = SpringApplication.run(Application.class, args);
-        DataBaseDao dataBaseDao = (DataBaseDao) app.getBean("dataBaseDaoImpl");
-        dataBaseDao.createUserTable();
+//        DataBaseDao dataBaseDao = (DataBaseDao) app.getBean("dataBaseDaoImpl");
+//        dataBaseDao.createUserTable();
     }
 
 }
