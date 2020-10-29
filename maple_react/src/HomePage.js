@@ -15,7 +15,7 @@ export default class HomePage extends React.Component {
              <h2 class="login-header">Log in</h2> 
 
                 <form class="login-container">
-                    <h3><input type="email" placeholder="Email"/></h3>
+                    <p><input type="email" placeholder="Email"/></p>
                     <p><input type="password" placeholder="Password"/></p>
                      <p><input type="submit" value="Log in"/></p> 
                 </form>  
