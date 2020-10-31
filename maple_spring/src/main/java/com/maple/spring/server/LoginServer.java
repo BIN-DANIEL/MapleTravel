@@ -14,7 +14,7 @@ public class LoginServer {
     /**
      * Reply message
      */
-    class LoginReplyMessage {
+    static class LoginReplyMessage {
         private boolean success;
         public boolean isSuccess() {
             return success;
@@ -23,7 +23,7 @@ public class LoginServer {
             this.success = success;
         }
     }
-    class LoginRequestMessage {
+    static class LoginRequestMessage {
         private String username;
         private String password;
 
@@ -47,8 +47,8 @@ public class LoginServer {
     AdminService adminService;
 
     @CrossOrigin
-    @RequestMapping("/login")
-    public LoginReplyMessage method(@RequestBody LoginRequestMessage request) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public LoginReplyMessage handleLogin(@RequestBody LoginRequestMessage request) {
 
         LoginReplyMessage msg = new LoginReplyMessage();
 

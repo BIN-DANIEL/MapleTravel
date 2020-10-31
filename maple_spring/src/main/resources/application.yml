@@ -73,5 +73,5 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
-  profiles: shaobin
+  profiles: jiahui
 ---
