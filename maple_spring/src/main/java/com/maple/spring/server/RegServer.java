@@ -15,7 +15,7 @@ import java.util.List;
 public class RegServer {
     @Autowired
     AdminService adminService;
-    private class RegInfo {
+    private static class RegInfo {
         private String username;
         private String password;
 
@@ -35,7 +35,7 @@ public class RegServer {
             this.password = password;
         }
     }
-    private class RegReplyMessage {
+    private static class RegReplyMessage {
         private boolean regSuccess;
 
         public boolean isRegSuccess() {
@@ -64,6 +64,7 @@ public class RegServer {
         return msg;
     }
 
+    //localhost:8080/hasUser?username="SHAOBIN"
     @CrossOrigin
     @RequestMapping("/hasUser")
     public boolean hasUser(@RequestParam(value="username") String username) {
