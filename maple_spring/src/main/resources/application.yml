@@ -1,19 +1,19 @@
 ---
 spring:
   profiles:
-    active: shaobin
+    active: yimiao
 ---
 server:
-  port: 8082
+  port: 8080
 spring:
   datasource:
-    username: ShaoBin
-    password: a88675577
-    url: jdbc:mysql://localhost:3306/MapleTravel?serverTimezone=UTC
+    username: root
+    password: Hk27848
+    url: jdbc:mysql://localhost:3306/mapletravel?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
-  profiles: shaobin
+  profiles: yimiaodfdsf
 ---
 server:
   port: 8082
