@@ -19,7 +19,9 @@ public class ApplicationTests {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    AdminDao adminDao = new AdminDaoImpl();
+    @Autowired
+    AdminDao adminDao;
+
     User test = new User();
     private static final String userTable = "User";
     private static final String nonexistentUser = "test123456test123456";
