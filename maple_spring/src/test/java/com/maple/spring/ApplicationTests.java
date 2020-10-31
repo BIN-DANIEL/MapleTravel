@@ -1,32 +1,35 @@
 package com.maple.spring;
 
 import com.maple.spring.dao.AdminDao;
+import com.maple.spring.dao.AdminDaoImpl;
 import com.maple.spring.entity.User;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import static org.junit.Assert.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
-class ApplicationTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
+public class ApplicationTests {
     @Autowired
-    AdminDao adminDao;
     JdbcTemplate jdbcTemplate;
+
+    AdminDao adminDao = new AdminDaoImpl();
     User test = new User();
     private static final String userTable = "User";
     private static final String nonexistentUser = "test123456test123456";
     private static final String normalTestUserName = "test123456";
     private static final String normalTestPassword = "123456789";
 
-    @BeforeClass
-    public void setup() {
+    @BeforeEach
+    public void setUser(){
         test.setUsername(normalTestUserName);
         test.setPassword(normalTestPassword);
-        if(adminDao.hasUser(nonexistentUser)){
-            adminDao.deleteUser(nonexistentUser);
-        }
     }
 
     @Test
