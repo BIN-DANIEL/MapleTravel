@@ -23,6 +23,7 @@ public class LoginServer {
             this.success = success;
         }
     }
+
     static class LoginRequestMessage {
         private String username;
         private String password;
@@ -43,21 +44,20 @@ public class LoginServer {
             this.password = password;
         }
     }
+
     @Autowired
     AdminService adminService;
 
     @CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public LoginReplyMessage handleLogin(@RequestBody LoginRequestMessage request) {
-
         LoginReplyMessage msg = new LoginReplyMessage();
 
-            if (adminService.getUser(request.getUsername()).getPassword().equals(request.getPassword())) {
-                msg.setSuccess(true);
-            } else {
-                msg.setSuccess(false);
-            }
+        if (adminService.getUser(request.getUsername()).getPassword().equals(request.getPassword())) {
+            msg.setSuccess(true);
+        } else {
+            msg.setSuccess(false);
+        }
         return msg;
     }
-
 }

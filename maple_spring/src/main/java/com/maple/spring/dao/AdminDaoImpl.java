@@ -3,6 +3,7 @@ package com.maple.spring.dao;
 import com.maple.spring.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
-    private static String userTable = "User";
+    private static final String userTable = "User";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -31,14 +32,9 @@ public class AdminDaoImpl implements AdminDao {
         String sql = "Select count(*) from " + userTable + " where username=?";
         Integer num = jdbcTemplate.queryForObject(sql, Integer.class, username);
         try{
-            if (num == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (IncorrectResultSizeDataAccessException e) {
-            return false;
+            return num != null && num == 1;
         } catch (DataAccessException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -48,7 +44,10 @@ public class AdminDaoImpl implements AdminDao {
         try{
             jdbcTemplate.update(sql, user.getUsername(), user.getPassword());
             return true;
-        }catch (DataAccessException e) {
+        }  catch (DuplicateKeyException e){
+            return true;   // Add user is idempotent, therefore it shouldn't throw error here
+        } catch (DataAccessException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -60,21 +59,18 @@ public class AdminDaoImpl implements AdminDao {
             jdbcTemplate.update(sql, username);
             return true;
         } catch(DataAccessException e) {
+            e.printStackTrace();
             return false;
         }
     }
-
 
     @Override
     public User getUser(String username) {
         String sql = "Select * from " + userTable + " where username=?";
         try{
             return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),username);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        } catch (IncorrectResultSizeDataAccessException e) {
-            return null;
         } catch (DataAccessException e) {
+            e.printStackTrace();
             return null;
         }
     }

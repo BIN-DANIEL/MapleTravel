@@ -9,10 +9,17 @@ import org.springframework.stereotype.Repository;
 public class DataBaseDaoImpl implements DataBaseDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    private static final String userTable = "User";
+
     @Override
     public void createUserTable() {
-        String sql = "CREATE TABLE User(username CHAR(255) PRIMARY KEY," +
-                "password CHAR(255))";
-        jdbcTemplate.execute(sql);
+        String checkExistSql = "SELECT COUNT(*) FROM" + userTable;
+        Integer checkResult = jdbcTemplate.queryForObject(checkExistSql, Integer.class);
+        if(checkResult == null || checkResult == 0){
+            String sql = "CREATE TABLE " + userTable + "(username CHAR(255) PRIMARY KEY," +
+                    "password CHAR(255))";
+            jdbcTemplate.execute(sql);
+        }
     }
 }

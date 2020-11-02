@@ -1,12 +1,9 @@
 package com.maple.spring;
 
 import com.maple.spring.dao.AdminDao;
-import com.maple.spring.dao.AdminDaoImpl;
 import com.maple.spring.entity.User;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +19,20 @@ public class ApplicationTests {
     @Autowired
     AdminDao adminDao;
 
-    User test = new User();
     private static final String userTable = "User";
     private static final String nonexistentUser = "test123456test123456";
     private static final String normalTestUserName = "test123456";
     private static final String normalTestPassword = "123456789";
-
-    @BeforeEach
-    public void setUser(){
-        test.setUsername(normalTestUserName);
-        test.setPassword(normalTestPassword);
-    }
+    private final User test = new User(normalTestUserName, normalTestPassword);
 
     @Test
     public void testCreateUserTable(){
         String sql = "SELECT COUNT(*) FROM " + userTable;
-        int numOfCars = jdbcTemplate.queryForObject(sql, Integer.class);
-        assertNotEquals(0, numOfCars);
+        Integer num = jdbcTemplate.queryForObject(sql, Integer.class);
+        if(num == null){
+            fail();
+        }
+        assertNotEquals(0, num.intValue());
     }
 
     @Test
@@ -49,16 +43,15 @@ public class ApplicationTests {
     @Test
     public void testHasUserExisting() {
         adminDao.addUser(test);
-        assertTrue(adminDao.hasUser(nonexistentUser));
+        assertTrue(adminDao.hasUser(test.getUsername()));
     }
 
     @Test
     public void testAddUser() {
-        User tempUser = new User();
-        tempUser.setPassword("999999999");
-        tempUser.setUsername("temp");
+        User tempUser = new User("temp", "999999999");
         adminDao.addUser(tempUser);
         assertTrue(adminDao.hasUser(tempUser.getUsername()));
+        adminDao.deleteUser(tempUser.getUsername());
     }
 
     @Test
@@ -76,10 +69,31 @@ public class ApplicationTests {
     }
 
     @Test
+    public void testSequentialAddDeleteUser() {
+        String sql = "SELECT COUNT(*) FROM " + userTable;
+        Integer numUserBefore = jdbcTemplate.queryForObject(sql, Integer.class);
+        if(numUserBefore == null){
+            fail();
+        }
+        for(int i = 0; i < 100; i++){
+            adminDao.addUser(new User(Integer.toString(i + 100000), Integer.toString(i + 100000)));
+        }
+        for(int i = 0; i < 100; i++){
+            adminDao.deleteUser(Integer.toString(i + 100000));
+        }
+        Integer numUserAfter = jdbcTemplate.queryForObject(sql, Integer.class);
+        if(numUserAfter == null){
+            fail();
+        }
+        assertEquals(numUserBefore, numUserAfter);
+    }
+
+    @Test
     public void testDeleteNonExistentUserNoException() {
         try {
             adminDao.deleteUser(nonexistentUser);
         } catch (Exception e){
+            e.printStackTrace();
             fail();
         }
         assertTrue(true);
