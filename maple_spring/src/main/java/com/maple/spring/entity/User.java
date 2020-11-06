@@ -8,7 +8,9 @@ package com.maple.spring.entity;
 public class User {
     private String username;
     private String password;
+    public User(){
 
+    }
     public User(String name, String pass){
         this.username = name;
         this.password = pass;
