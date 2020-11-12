@@ -14,6 +14,8 @@ public class Application {
         ApplicationContext app = SpringApplication.run(Application.class, args);
         DataBaseDao dataBaseDao = (DataBaseDao) app.getBean("dataBaseDaoImpl");
         dataBaseDao.createUserTable();
+        dataBaseDao.createCourseTable();
+        dataBaseDao.createEnrollmentTable();
     }
 
 }
