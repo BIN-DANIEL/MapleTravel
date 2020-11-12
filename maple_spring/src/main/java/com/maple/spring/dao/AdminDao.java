@@ -13,7 +13,7 @@ public interface AdminDao {
     public boolean addUser(User user);
     public boolean addCourse(Course course);
     public boolean deleteUser(String username);
-    public boolean deleteCourse(String username);
+    public boolean deleteCourse(String courseName);
     public boolean enrollCourse(String username, String courseName);
     public boolean dropCourse(String username, String courseName);
     public String getCourseDescription(String courseName);

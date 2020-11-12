@@ -2,10 +2,12 @@ package com.maple.spring.service;
 
 
 import com.maple.spring.dao.AdminDao;
+import com.maple.spring.entity.Course;
 import com.maple.spring.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,12 +19,44 @@ public class AdminService {
         return adminDao.hasUser(username);
     }
 
+    public boolean hasCourse(String name){
+        return adminDao.hasCourse(name);
+    }
+
     public boolean addUser(User user) {
         return adminDao.addUser(user);
     }
 
+    public boolean addCourse(String courseName, String description, String link){
+        return adminDao.addCourse(new Course(courseName, description, link));
+    }
+
     public boolean deleteUser(String username) {
         return adminDao.deleteUser(username);
+    }
+
+    public boolean deleteCourse(String courseName){
+        return adminDao.deleteCourse(courseName);
+    }
+
+    public boolean enrollCourse(String username, String courseName){
+        return adminDao.enrollCourse(username, courseName);
+    }
+
+    public boolean dropCourse(String username, String courseName){
+        return adminDao.dropCourse(username, courseName);
+    }
+
+    public String getCourseDescription(String courseName){
+        return adminDao.getCourseDescription(courseName);
+    }
+
+    public String getCourseLink(String courseName){
+        return adminDao.getCourseLink(courseName);
+    }
+
+    public ArrayList<String> getUserCourses(String username){
+        return adminDao.getUserCourses(username);
     }
 
     public User getUser(String username) {
