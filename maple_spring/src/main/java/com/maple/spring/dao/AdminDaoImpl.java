@@ -4,6 +4,7 @@ import com.maple.spring.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -125,6 +126,9 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public boolean enrollCourse(Enrollment enrollment) {
         try {
+            if(!hasCourse(enrollment.getCourseName())){
+                return false; // doesn't do anything it there is no existing course with this name
+            }
             if(!hasEnrollment(enrollment)){
                 String sql = "INSERT INTO " + enrollmentTable + " values(?, ?)";
                 jdbcTemplate.update(sql, enrollment.getUsername(), enrollment.getCourseName());
@@ -173,6 +177,8 @@ public class AdminDaoImpl implements AdminDao {
         try {
             String sql = "SELECT description FROM " + courseTable + " WHERE courseName = ?";
             return jdbcTemplate.queryForObject(sql, new Object[] { courseName }, String.class);
+        } catch (EmptyResultDataAccessException e){
+            return null;
         } catch(DataAccessException e) {
             e.printStackTrace();
             return "";
@@ -184,17 +190,24 @@ public class AdminDaoImpl implements AdminDao {
         try {
             String sql = "SELECT link FROM " + courseTable + " WHERE courseName = ?";
             return jdbcTemplate.queryForObject(sql, new Object[] { courseName }, String.class);
+        } catch (EmptyResultDataAccessException e){
+            return null;
         } catch(DataAccessException e) {
             e.printStackTrace();
             return "";
         }
     }
 
+    /*
+        returns null if user does not exist
+     */
     @Override
     public User getUser(String username) {
         String sql = "Select * from " + userTable + " where username=?";
-        try{
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class),username);
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username);
+        } catch (EmptyResultDataAccessException e){
+            return null;
         } catch (DataAccessException e) {
             e.printStackTrace();
             return null;

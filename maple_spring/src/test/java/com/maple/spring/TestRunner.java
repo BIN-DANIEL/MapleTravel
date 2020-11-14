@@ -12,7 +12,6 @@ public class TestRunner {
         for (Failure failure : result.getFailures()) {
             System.out.println("---------------------");
             System.out.println(failure.toString());
-            System.out.println(failure.getDescription());
             System.out.println("---------------------");
         }
 

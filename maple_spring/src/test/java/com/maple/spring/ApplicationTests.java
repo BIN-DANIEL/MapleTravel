@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -34,7 +35,7 @@ public class ApplicationTests {
     private static final Enrollment nonexistentEnrollment = new Enrollment("66AB", "CS577");
     private static final User normalTestUser = new User("test123456", "123456789");
     private static final Course normalTestCourse = new Course("Camping101", "Learn to be a camper", "zoom.whatever.com/3322");
-    private static final Enrollment normalTestEnrollment = new Enrollment("66AB", "CS506");
+    private static final Enrollment normalTestEnrollment = new Enrollment("66AB", "Camping101");
     private static boolean setUpIsDone = false;
     private static int totalTests;
     private static int testsRan;
@@ -146,10 +147,12 @@ public class ApplicationTests {
 
     @Test
     public void testEnroll() {
+        adminDao.addCourse(new Course("CS999", "???", "!!!!"));
         Enrollment tempEnrollment = new Enrollment("66AB", "CS999");
         adminDao.enrollCourse(tempEnrollment);
         assertTrue(adminDao.hasEnrollment(tempEnrollment));
         adminDao.dropCourse(tempEnrollment);
+        adminDao.deleteCourse("CS999");
     }
 
     @Test
@@ -318,7 +321,41 @@ public class ApplicationTests {
     }
 
     @Test
-    public void testGetUser(){
+    public void testGetExistingUser(){
         assertEquals(normalTestUser, adminDao.getUser(normalTestUser.getUsername()));
+    }
+
+    @Test
+    public void testGetNonexistentUser(){
+        assertNull(adminDao.getUser(nonexistentUser.getUsername()));
+    }
+
+    @Test
+    public void testGetCourseDetail(){
+        assertEquals(adminDao.getCourseDescription(normalTestCourse.getCourseName()), normalTestCourse.getDescription());
+        assertEquals(adminDao.getCourseLink(normalTestCourse.getCourseName()), normalTestCourse.getLink());
+        assertNull(adminDao.getCourseDescription(nonexistentCourse.getCourseName()));
+        assertNull(adminDao.getCourseLink(nonexistentCourse.getCourseName()));
+    }
+
+    @Test
+    public void testGetUserCourses(){
+        adminDao.addCourse(new Course("CS333", "TEST", "WWW.WWW.WWW"));
+        adminDao.addCourse(new Course("CS334", "TEST", "WWW.WWW.WWW"));
+        adminDao.addCourse(new Course("CS335", "TEST", "WWW.WWW.WWW"));
+        adminDao.enrollCourse(new Enrollment(normalTestUser.getUsername(), "CS333"));
+        adminDao.enrollCourse(new Enrollment(normalTestUser.getUsername(), "CS334"));
+        adminDao.enrollCourse(new Enrollment(normalTestUser.getUsername(), "CS335"));
+        ArrayList<String> temp = new ArrayList<String>();
+        temp.add("CS333");
+        temp.add("CS334");
+        temp.add("CS335");
+        assertEquals(adminDao.getUserCourses(normalTestUser.getUsername()), temp);
+        adminDao.dropCourse(new Enrollment(normalTestUser.getUsername(), "CS333"));
+        adminDao.dropCourse(new Enrollment(normalTestUser.getUsername(), "CS334"));
+        adminDao.dropCourse(new Enrollment(normalTestUser.getUsername(), "CS335"));
+        adminDao.deleteCourse("CS333");
+        adminDao.deleteCourse("CS334");
+        adminDao.deleteCourse("CS335");
     }
 }

@@ -18,6 +18,9 @@ public class User {
         this.password = pass;
     }
 
+    /*
+        Used for user object comparison
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o){
