@@ -3,6 +3,7 @@ package com.maple.spring.service;
 
 import com.maple.spring.dao.AdminDao;
 import com.maple.spring.entity.Course;
+import com.maple.spring.entity.Enrollment;
 import com.maple.spring.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,11 +41,11 @@ public class AdminService {
     }
 
     public boolean enrollCourse(String username, String courseName){
-        return adminDao.enrollCourse(username, courseName);
+        return adminDao.enrollCourse(new Enrollment(username, courseName));
     }
 
     public boolean dropCourse(String username, String courseName){
-        return adminDao.dropCourse(username, courseName);
+        return adminDao.dropCourse(new Enrollment(username, courseName));
     }
 
     public String getCourseDescription(String courseName){

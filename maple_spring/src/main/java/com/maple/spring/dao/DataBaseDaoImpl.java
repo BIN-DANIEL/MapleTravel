@@ -41,7 +41,7 @@ public class DataBaseDaoImpl implements DataBaseDao {
         String checkExistSql = "select count(*) from information_schema.tables where table_name = ?";
         Integer checkResult = jdbcTemplate.queryForObject(checkExistSql, new Object[] { enrollmentTable }, Integer.class);
         if(checkResult == null || checkResult == 0){
-            String sql = "CREATE TABLE " + enrollmentTable + "(username CHAR(255) PRIMARY KEY," +
+            String sql = "CREATE TABLE " + enrollmentTable + "(username CHAR(255)," +
                     "courseName CHAR(255))";
             jdbcTemplate.execute(sql);
         }

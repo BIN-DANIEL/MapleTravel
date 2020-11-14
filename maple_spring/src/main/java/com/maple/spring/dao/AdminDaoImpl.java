@@ -41,12 +41,30 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public boolean hasCourse(String course) {
+    public boolean hasCourse(String courseName) {
         String sql = "Select count(*) from " + courseTable + " where courseName=?";
-        Integer num = jdbcTemplate.queryForObject(sql, Integer.class, course);
+        Integer num = jdbcTemplate.queryForObject(sql, Integer.class, courseName);
         try{
             return num != null && num == 1;
         } catch (DataAccessException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean hasEnrollment(Enrollment enrollment) {
+        try{
+            String checkExistSql = "SELECT COUNT(*) FROM " + enrollmentTable + " WHERE username = ? AND courseName = ?";
+            Integer checkResult = jdbcTemplate.queryForObject(checkExistSql, Integer.class, enrollment.getUsername(), enrollment.getCourseName());
+            if(checkResult == null || checkResult == 0){
+                return false;
+            } else if (checkResult == 1){
+                return true;
+            } else {
+                throw new Exception("Duplicated enrollment for student:" + enrollment.getUsername() + " for course" + enrollment.getCourseName());
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -105,13 +123,11 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public boolean enrollCourse(String username, String courseName) {
+    public boolean enrollCourse(Enrollment enrollment) {
         try {
-            String checkExistSql = "SELECT COUNT(*) FROM" + enrollmentTable + " WHERE username = ? AND courseName = ?";
-            Integer checkResult = jdbcTemplate.queryForObject(checkExistSql, Integer.class, username, courseName);
-            if(checkResult == null || checkResult == 0){
+            if(!hasEnrollment(enrollment)){
                 String sql = "INSERT INTO " + enrollmentTable + " values(?, ?)";
-                jdbcTemplate.update(sql, username, courseName);
+                jdbcTemplate.update(sql, enrollment.getUsername(), enrollment.getCourseName());
             }
             return true;
         } catch(DataAccessException e) {
@@ -121,13 +137,11 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public boolean dropCourse(String username, String courseName) {
+    public boolean dropCourse(Enrollment enrollment) {
         try {
-            String checkExistSql = "SELECT COUNT(*) FROM" + enrollmentTable + " WHERE username = ? AND courseName = ?";
-            Integer checkResult = jdbcTemplate.queryForObject(checkExistSql, Integer.class, username, courseName);
-            if(checkResult != null && checkResult != 0){
+            if(hasEnrollment(enrollment)){
                 String sql = "DELETE FROM " + enrollmentTable + " WHERE username = ? AND courseName = ?";
-                jdbcTemplate.update(sql, username, courseName);
+                jdbcTemplate.update(sql, enrollment.getUsername(), enrollment.getCourseName());
             }
             return true;
         } catch(DataAccessException e) {
@@ -180,7 +194,7 @@ public class AdminDaoImpl implements AdminDao {
     public User getUser(String username) {
         String sql = "Select * from " + userTable + " where username=?";
         try{
-            return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),username);
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class),username);
         } catch (DataAccessException e) {
             e.printStackTrace();
             return null;

@@ -40,6 +40,6 @@ public class Course {
     }
 
     public String toString() {
-        return "|Course Name:" + this.courseName + "|Description:" + this.description + "|link:" + this.link + "|";
+        return "Course|courseName:" + this.courseName + "|description:" + this.description + "|link:" + this.link + "|";
     }
 }
