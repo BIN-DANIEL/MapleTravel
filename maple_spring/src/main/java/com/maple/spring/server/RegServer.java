@@ -15,6 +15,7 @@ import java.util.List;
 public class RegServer {
     @Autowired
     AdminService adminService;
+
     private static class RegInfo {
         private String username;
         private String password;
@@ -35,6 +36,7 @@ public class RegServer {
             this.password = password;
         }
     }
+
     private static class RegReplyMessage {
         private boolean regSuccess;
 
@@ -46,21 +48,17 @@ public class RegServer {
             this.regSuccess = regSuccess;
         }
     }
+
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public  RegReplyMessage handleRegister(@RequestBody RegInfo regInfo) {
         RegReplyMessage msg = new RegReplyMessage();
         // Set Up User
-        User newUser = new User();
-        newUser.setUsername(regInfo.getUsername());
-        newUser.setPassword(regInfo.getPassword());
+        User newUser = new User(regInfo.getUsername(), regInfo.getPassword());
+
         // Set Up User Information
 
-        if (adminService.addUser(newUser)) {
-            msg.setRegSuccess(true);
-        } else {
-                msg.setRegSuccess(false);
-        }
+        msg.setRegSuccess(adminService.addUser(newUser));
         return msg;
     }
 
