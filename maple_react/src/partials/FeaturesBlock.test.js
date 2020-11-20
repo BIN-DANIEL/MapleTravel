@@ -9,7 +9,7 @@ import {
 import FeaturesBlocks from './FeaturesBlocks';
 
 
-describe("Newsletter Test Case", () => {
+describe("FeatureBlock Test Case", () => {
     it("Text Showing Correctly", () => {
         const {
             container
