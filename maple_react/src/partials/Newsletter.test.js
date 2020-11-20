@@ -8,17 +8,14 @@ import {
 } from '@testing-library/react';
 import Newsletter from './Newsletter';
 
-
 describe("Newsletter Test Case", () => {
     it("Text Showing Correctly", () => {
         const {
             container
-        } = render( <
-            MemoryRouter >
-            <
-            Newsletter / >
-            <
-            /MemoryRouter>
+        } = render(
+            <MemoryRouter >
+                <Newsletter/>
+            </MemoryRouter>
         );
         expect(screen.findByText("Discover the Place")).not.toBeNull();
         expect(screen.findByText("可俯瞰美丽清澈的海湾湖")).not.toBeNull();
