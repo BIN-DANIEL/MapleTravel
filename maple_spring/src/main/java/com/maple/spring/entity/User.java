@@ -1,5 +1,7 @@
 package com.maple.spring.entity;
 
+import java.util.Objects;
+
 /**
  * Entity Class for User
  * @ PrimaryKey{username}
@@ -8,10 +10,28 @@ package com.maple.spring.entity;
 public class User {
     private String username;
     private String password;
+    public User(){
 
+    }
     public User(String name, String pass){
         this.username = name;
         this.password = pass;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (getClass() != o.getClass()){
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(username, user.getUsername())
+                && Objects.equals(password, user.getPassword());
     }
 
     public String getUsername() {
@@ -28,5 +48,5 @@ public class User {
         this.password = password;
     }
 
-    public String toString(){ return "|name:" + this.username + "|pass:" + this.password + "|"; }
+    public String toString(){ return "User|name:" + this.username + "|pass:" + this.password + "|"; }
 }

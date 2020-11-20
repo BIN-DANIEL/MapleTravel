@@ -8,7 +8,7 @@ window.$ = $;
 function SignIn() {
 
   function HandleButton() {
-    let username = $("#username").val();
+    let username = $("#email").val();
     let password = $("#password").val();
     console.log(username);
     console.log(password);
@@ -25,7 +25,7 @@ function SignIn() {
         method: 'POST',
         data: JSON.stringify(loginInfo),
         error: (jqXHR, textStatus, errorThrown) => {
-            console.log(errorThrown)
+            console.log(jqXHR.status);
         }
 
     }).done((reply, textStatus, jqXHR)=>{
