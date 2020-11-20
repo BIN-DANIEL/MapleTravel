@@ -40,8 +40,8 @@ function Features() {
           <div className="md:grid md:grid-cols-12 md:gap-6">
 
             {/* Content */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
-              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
+            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6 aos-animate" data-aos="fade-right">
+              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8 aos-animate">
                 <h3 className="h3 mb-3">水上活动和陆地活动</h3>
                 <p className="text-xl text-gray-600">种类较多，以下仅列举特色活动</p>
               </div>
@@ -53,7 +53,7 @@ function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(1); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">皮划艇/独木舟</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1 ">皮划艇/独木舟</div>
                     <div className="text-gray-600"></div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -96,7 +96,7 @@ function Features() {
             </div>
 
             {/* Tabs items */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1" data-aos="zoom-y-out" ref={tabs}>
+            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1 aos-animate" data-aos="zoom-y-out" ref={tabs}>
               <div className="relative flex flex-col text-center lg:text-right">
                 {/* Item 1 */}
                 <Transition
