@@ -5,6 +5,7 @@ function URLs() {
     this.hasUserURL = this.root + "hasUser";
 
     this.signUpURL = this.root + "register";
+    this.profileURL = this.root + "allEnrollment";
     this.buildHasUserURL = (username) => {
         return this.hasUserURL + "?username=" + username;
     };

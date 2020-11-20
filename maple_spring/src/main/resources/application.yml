@@ -1,7 +1,7 @@
 ---
 spring:
   profiles:
-    active: shaobin
+    active: yuxuan
 ---
 server:
   port: 8082

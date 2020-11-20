@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class LoginServer {
     /**
      * Reply message
      */
-    static class LoginReplyMessage {
+    public static class LoginReplyMessage {
         private boolean success;
         public boolean isSuccess() {
             return success;
@@ -24,7 +24,7 @@ public class LoginServer {
         }
     }
 
-    static class LoginRequestMessage {
+    public static class LoginRequestMessage {
         private String username;
         private String password;
 
@@ -59,5 +59,17 @@ public class LoginServer {
             msg.setSuccess(false);
         }
         return msg;
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/allEnrollment", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<String> getProfile(@RequestParam(value="username") String username) {
+        List<String> courses = adminService.getUserCourses(username);
+        List<String> res = new ArrayList<>();
+        for(String x: courses){
+            res.add(x);
+            res.add(adminService.getCourseLink(x));
+        }
+        return res;
     }
 }

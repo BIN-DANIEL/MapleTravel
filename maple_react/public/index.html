@@ -10,27 +10,39 @@
       content="Web site created using create-react-app"
     />
     <style>
-      #zmmtg-root {
-        display: none;
+      body {
+        overflow: auto !important;
+      }
+
+      #zmmtg-root, .meeting-client, .meeting-client-inner {
+        background-color:transparent !important;
+        width: 100% !important;
+        height: 100% !important;
+        position: relative !important;
+      }
+
+      #wc-footer {
+        bottom: auto !important;
+        width: 100% !important;
+      }
+
+      #dialog-join {
+        width: 100% !important;
+      }
+
+      #sv-active-video, .active-main, #sv-active-speaker-view, .main-layout {
+        height: 100% !important;
+        width: 100% !important;
+      }
+
+      .suspension-window {
+        transform: translate(-444px, 10px) !important;
       }
     </style>
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <title>Maple Travel</title>
     <link
       type="text/css"
       rel="stylesheet"
@@ -44,21 +56,11 @@
     <script src="https://source.zoom.us/1.7.9/lib/vendor/jquery.min.js"></script>
     <script src="https://source.zoom.us/1.7.9/lib/vendor/lodash.min.js"></script>
   </head>
-  <body class="font-inter antialiased bg-white text-gray-900 tracking-tight">
+  <body class="font-inter antialiased bg-white text-gray-900 tracking-tight" style = "overflow-y: scroll;">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div id="root" style = ""></div>
   </body>
 </html>

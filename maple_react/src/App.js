@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import ClassRoom from './pages/ClassRoom';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
         <Route path="/classroom">
           <ClassRoom />
         </Route>
+        <Route component={Profile} path="/profile/:username"></Route>
       </Switch>
     </>
   );

@@ -16,7 +16,7 @@ public class RegServer {
     @Autowired
     AdminService adminService;
 
-    private static class RegInfo {
+    public static class RegInfo {
         private String username;
         private String password;
 
@@ -37,7 +37,7 @@ public class RegServer {
         }
     }
 
-    private static class RegReplyMessage {
+    public static class RegReplyMessage {
         private boolean regSuccess;
 
         public boolean isRegSuccess() {
@@ -51,7 +51,7 @@ public class RegServer {
 
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public  RegReplyMessage handleRegister(@RequestBody RegInfo regInfo) {
+    public RegReplyMessage handleRegister(@RequestBody RegInfo regInfo) {
         RegReplyMessage msg = new RegReplyMessage();
         // Set Up User
         User newUser = new User(regInfo.getUsername(), regInfo.getPassword());

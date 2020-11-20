@@ -174,8 +174,7 @@ public class AdminDaoImpl implements AdminDao {
             String sql = "SELECT description FROM " + courseTable + " WHERE courseName = ?";
             return jdbcTemplate.queryForObject(sql, new Object[] { courseName }, String.class);
         } catch(DataAccessException e) {
-            e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
@@ -185,8 +184,7 @@ public class AdminDaoImpl implements AdminDao {
             String sql = "SELECT link FROM " + courseTable + " WHERE courseName = ?";
             return jdbcTemplate.queryForObject(sql, new Object[] { courseName }, String.class);
         } catch(DataAccessException e) {
-            e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
@@ -196,7 +194,6 @@ public class AdminDaoImpl implements AdminDao {
         try{
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class),username);
         } catch (DataAccessException e) {
-            e.printStackTrace();
             return null;
         }
     }

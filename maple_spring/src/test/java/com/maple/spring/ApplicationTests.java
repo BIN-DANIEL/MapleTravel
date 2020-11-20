@@ -1,6 +1,7 @@
 package com.maple.spring;
 
 import com.maple.spring.dao.AdminDao;
+import com.maple.spring.dao.DataBaseDaoImpl;
 import com.maple.spring.entity.Course;
 import com.maple.spring.entity.Enrollment;
 import com.maple.spring.entity.User;
@@ -16,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -34,14 +37,14 @@ public class ApplicationTests {
     private static final Enrollment nonexistentEnrollment = new Enrollment("66AB", "CS577");
     private static final User normalTestUser = new User("test123456", "123456789");
     private static final Course normalTestCourse = new Course("Camping101", "Learn to be a camper", "zoom.whatever.com/3322");
-    private static final Enrollment normalTestEnrollment = new Enrollment("66AB", "CS506");
+    private static final Enrollment normalTestEnrollment = new Enrollment("66AB", "Camping101");
     private static boolean setUpIsDone = false;
     private static int totalTests;
     private static int testsRan;
 
     @Before
-    public void setUp(){
-        if(!setUpIsDone){
+    public void setUp() {
+        if (!setUpIsDone) {
             System.out.println("-------------SETUP-------------");
             setUpIsDone = true;
             totalTests = 0;
@@ -58,9 +61,9 @@ public class ApplicationTests {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         testsRan++;
-        if(testsRan == totalTests){
+        if (testsRan == totalTests) {
             System.out.println("-------------TEARDOWN-------------");
             adminDao.deleteUser(normalTestUser.getUsername());
             adminDao.deleteCourse(normalTestCourse.getCourseName());
@@ -69,30 +72,30 @@ public class ApplicationTests {
     }
 
     @Test
-    public void testCreateUserTable(){
+    public void testCreateUserTable() {
         String checkExistSql = "select count(*) from information_schema.tables where table_name = ?";
-        Integer num = jdbcTemplate.queryForObject(checkExistSql, new Object[]{ userTable }, Integer.class);
-        if(num == null){
+        Integer num = jdbcTemplate.queryForObject(checkExistSql, new Object[]{userTable}, Integer.class);
+        if (num == null) {
             fail("JDBC Query Error");
         }
         assertNotEquals(0, num.intValue());
     }
 
     @Test
-    public void testCreateCourseTable(){
+    public void testCreateCourseTable() {
         String checkExistSql = "select count(*) from information_schema.tables where table_name = ?";
-        Integer num = jdbcTemplate.queryForObject(checkExistSql, new Object[]{ courseTable }, Integer.class);
-        if(num == null){
+        Integer num = jdbcTemplate.queryForObject(checkExistSql, new Object[]{courseTable}, Integer.class);
+        if (num == null) {
             fail("JDBC Query Error");
         }
         assertNotEquals(0, num.intValue());
     }
 
     @Test
-    public void testCreateEnrollmentTable(){
+    public void testCreateEnrollmentTable() {
         String checkExistSql = "select count(*) from information_schema.tables where table_name = ?";
-        Integer num = jdbcTemplate.queryForObject(checkExistSql, new Object[]{ enrollmentTable }, Integer.class);
-        if(num == null){
+        Integer num = jdbcTemplate.queryForObject(checkExistSql, new Object[]{enrollmentTable}, Integer.class);
+        if (num == null) {
             fail("JDBC Query Error");
         }
         assertNotEquals(0, num.intValue());
@@ -146,10 +149,12 @@ public class ApplicationTests {
 
     @Test
     public void testEnroll() {
+        adminDao.addCourse(new Course("CS999", "???", "!!!!"));
         Enrollment tempEnrollment = new Enrollment("66AB", "CS999");
         adminDao.enrollCourse(tempEnrollment);
         assertTrue(adminDao.hasEnrollment(tempEnrollment));
         adminDao.dropCourse(tempEnrollment);
+        adminDao.deleteCourse("CS999");
     }
 
     @Test
@@ -173,7 +178,7 @@ public class ApplicationTests {
     }
 
     @Test
-    public void testEnrollIdempotent(){
+    public void testEnrollIdempotent() {
         adminDao.enrollCourse(normalTestEnrollment);
         adminDao.enrollCourse(normalTestEnrollment);
         adminDao.dropCourse(normalTestEnrollment);
@@ -199,7 +204,7 @@ public class ApplicationTests {
     }
 
     @Test
-    public void testDropCourseIdempotent(){
+    public void testDropCourseIdempotent() {
         adminDao.dropCourse(normalTestEnrollment);
         adminDao.dropCourse(normalTestEnrollment);
         assertFalse(adminDao.hasEnrollment(normalTestEnrollment));
@@ -213,22 +218,22 @@ public class ApplicationTests {
     public void testSequentialAddDeleteUser() {
         String sql = "SELECT COUNT(*) FROM " + userTable;
         Integer numUserBefore = jdbcTemplate.queryForObject(sql, Integer.class);
-        if(numUserBefore == null){
+        if (numUserBefore == null) {
             fail("JDBC Query Error");
         }
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             adminDao.addUser(new User(nonexistentUser.getUsername() + i, Integer.toString(i + 100000)));
         }
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             adminDao.deleteUser(nonexistentUser.getUsername() + i);
         }
-        for(int i = 0; i < 100; i++){
-            if(adminDao.hasUser(nonexistentUser.getUsername() + i)) {
+        for (int i = 0; i < 100; i++) {
+            if (adminDao.hasUser(nonexistentUser.getUsername() + i)) {
                 fail("Database has remaining records after deletion");
             }
         }
         Integer numUserAfter = jdbcTemplate.queryForObject(sql, Integer.class);
-        if(numUserAfter == null){
+        if (numUserAfter == null) {
             fail("JDBC Query Error");
         }
         assertEquals(numUserBefore, numUserAfter);
@@ -238,22 +243,22 @@ public class ApplicationTests {
     public void testSequentialAddDeleteCourse() {
         String sql = "SELECT COUNT(*) FROM " + courseTable;
         Integer numUserBefore = jdbcTemplate.queryForObject(sql, Integer.class);
-        if(numUserBefore == null){
+        if (numUserBefore == null) {
             fail("JDBC Query Error");
         }
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             adminDao.addCourse(new Course(nonexistentCourse.getCourseName() + i, "Intro to Camping" + i, "www.camping.com/" + i));
         }
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             adminDao.deleteCourse(nonexistentCourse.getCourseName() + i);
         }
-        for(int i = 0; i < 100; i++){
-            if(adminDao.hasCourse(nonexistentCourse.getCourseName() + i)){
+        for (int i = 0; i < 100; i++) {
+            if (adminDao.hasCourse(nonexistentCourse.getCourseName() + i)) {
                 fail("Database has remaining records after deletion");
             }
         }
         Integer numUserAfter = jdbcTemplate.queryForObject(sql, Integer.class);
-        if(numUserAfter == null){
+        if (numUserAfter == null) {
             fail("JDBC Query Error");
         }
         assertEquals(numUserBefore, numUserAfter);
@@ -263,22 +268,22 @@ public class ApplicationTests {
     public void testSequentialEnrollDropCourse() {
         String sql = "SELECT COUNT(*) FROM " + enrollmentTable;
         Integer numUserBefore = jdbcTemplate.queryForObject(sql, Integer.class);
-        if(numUserBefore == null){
+        if (numUserBefore == null) {
             fail("JDBC Query Error");
         }
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             adminDao.enrollCourse(new Enrollment("77BC" + i + 100000, "Intro to Camping" + i + 100000));
         }
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             adminDao.dropCourse(new Enrollment("77BC" + i + 100000, "Intro to Camping" + i + 100000));
         }
-        for(int i = 0; i < 100; i++){
-            if(adminDao.hasEnrollment(new Enrollment("77BC" + i + 100000, "Intro to Camping" + i + 100000))){
+        for (int i = 0; i < 100; i++) {
+            if (adminDao.hasEnrollment(new Enrollment("77BC" + i + 100000, "Intro to Camping" + i + 100000))) {
                 fail("Database has remaining records after deletion");  // fail if some records remained in the database
             }
         }
         Integer numUserAfter = jdbcTemplate.queryForObject(sql, Integer.class);
-        if(numUserAfter == null){
+        if (numUserAfter == null) {
             fail("JDBC Query Error");
         }
         assertEquals(numUserBefore, numUserAfter);
@@ -291,7 +296,7 @@ public class ApplicationTests {
     public void testDeleteNonExistentUserNoException() {
         try {
             adminDao.deleteUser(nonexistentUser.getUsername());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             fail("Exception thrown");
         }
@@ -301,7 +306,7 @@ public class ApplicationTests {
     public void testDeleteNonExistentCourseNoException() {
         try {
             adminDao.deleteCourse(nonexistentCourse.getCourseName());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             fail("Exception thrown");
         }
@@ -311,14 +316,54 @@ public class ApplicationTests {
     public void testDropNonExistentCourseNoException() {
         try {
             adminDao.dropCourse(nonexistentEnrollment);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             fail("Exception thrown");
         }
     }
 
     @Test
-    public void testGetUser(){
+    public void testGetExistingUser() {
         assertEquals(normalTestUser, adminDao.getUser(normalTestUser.getUsername()));
+    }
+
+    @Test
+    public void testGetNonexistentUser() {
+        assertNull(adminDao.getUser(nonexistentUser.getUsername()));
+    }
+
+    @Test
+    public void testGetCourseDetail() {
+        assertEquals(adminDao.getCourseDescription(normalTestCourse.getCourseName()), normalTestCourse.getDescription());
+        assertEquals(adminDao.getCourseLink(normalTestCourse.getCourseName()), normalTestCourse.getLink());
+        assertNull(adminDao.getCourseDescription(nonexistentCourse.getCourseName()));
+        assertNull(adminDao.getCourseLink(nonexistentCourse.getCourseName()));
+    }
+
+    @Test
+    public void testGetUserCourses() {
+        adminDao.addCourse(new Course("CS333", "TEST", "WWW.WWW.WWW"));
+        adminDao.addCourse(new Course("CS334", "TEST", "WWW.WWW.WWW"));
+        adminDao.addCourse(new Course("CS335", "TEST", "WWW.WWW.WWW"));
+        adminDao.enrollCourse(new Enrollment(normalTestUser.getUsername(), "CS333"));
+        adminDao.enrollCourse(new Enrollment(normalTestUser.getUsername(), "CS334"));
+        adminDao.enrollCourse(new Enrollment(normalTestUser.getUsername(), "CS335"));
+        ArrayList<String> temp = new ArrayList<String>();
+        temp.add("CS333");
+        temp.add("CS334");
+        temp.add("CS335");
+        assertEquals(adminDao.getUserCourses(normalTestUser.getUsername()), temp);
+        adminDao.dropCourse(new Enrollment(normalTestUser.getUsername(), "CS333"));
+        adminDao.dropCourse(new Enrollment(normalTestUser.getUsername(), "CS334"));
+        adminDao.dropCourse(new Enrollment(normalTestUser.getUsername(), "CS335"));
+        adminDao.deleteCourse("CS333");
+        adminDao.deleteCourse("CS334");
+        adminDao.deleteCourse("CS335");
+    }
+
+    @Test
+    public void testRandString() {
+        String rand = DataBaseDaoImpl.getRandString(3);
+        assertEquals(3, rand.length());
     }
 }

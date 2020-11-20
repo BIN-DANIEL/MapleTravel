@@ -4,4 +4,5 @@ public interface DataBaseDao {
     public void createUserTable();
     public void createCourseTable();
     public void createEnrollmentTable();
+    public void loadDummyData();
 }

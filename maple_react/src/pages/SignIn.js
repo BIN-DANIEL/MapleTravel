@@ -30,7 +30,7 @@ function SignIn() {
 
     }).done((reply, textStatus, jqXHR)=>{
         if (reply.success) {
-            alert("login Success!")
+            window.location.href = "http://localhost:3000/profile" + "/" + username;
         } else {
             // TODO: 别用alert， 这个只是用来demo的， 最后还是要改
             alert("login Failed!");

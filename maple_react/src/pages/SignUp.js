@@ -8,7 +8,8 @@ window.$ = $;
 
 function SignUp() {
 
-  function HandleClick() {
+  function HandleClick2() {
+        console.log("!!!!");
         console.log(URLs.loginURL);
         let username = $("#username").val();
         let password = $("#password").val();
@@ -41,8 +42,7 @@ function SignUp() {
                     }
                 }).done((data, textStatus, jqXHR)=>{
                     if (data.regSuccess) {
-                        alert("Register Successfully");
-                        //TODO: Display corresponding UI, simple alert here, modify later
+                         window.location.href = "http://localhost:3000/profile" + "/" + username;
                     } else {
                         alert("Register Failed");
                         //TODO: Simple alert here, modify later
@@ -97,7 +97,7 @@ function SignUp() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3" >
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={() => HandleClick()}>Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full" onClick={() => HandleClick2()}>Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">

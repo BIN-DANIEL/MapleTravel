@@ -9,4 +9,3 @@ For our backend server:
 
 Instructions for building and running the test:
 1. Jest test
-2. 
