@@ -21,7 +21,6 @@ describe("FeatureBlock Test Case", () => {
         );
         expect(screen.findByText("Welcome back.")).not.toBeNull();
         expect(screen.findByText("Having trouble signing in?")).not.toBeNull();
-
         expect(screen.findByText("Keep me signed in")).not.toBeNull();
 
         expect(screen.findByText("Having trouble signing in?")).not.toBeNull();

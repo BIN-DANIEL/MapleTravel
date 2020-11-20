@@ -28,7 +28,6 @@ describe("Newsletter Test Case", () => {
         expect(screen.findByText("terms & conditions")).not.toBeNull();
 
 
-
         expect(screen.findByText("Password")).not.toBeNull();
 
         expect(screen.findByText("Re-enter Password")).not.toBeNull();
