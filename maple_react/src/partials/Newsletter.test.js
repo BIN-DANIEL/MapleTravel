@@ -35,29 +35,31 @@ describe("Newsletter Test Case", () => {
         expect(
             screen.findAllByText("距渥太华320公里，位于风景如画的马斯科卡")
         ).not.toBeNull();
-
+        console.log(container.querySelector(
+                                    '#newsletter'
+                                ).children[0].children[0].children[0].children[0].children[0].children[0].textContent);
         expect(
             container.querySelector(
                 '#newsletter'
-            ).children[0].children[0].children[0].children[0].children[0].src.includes("Picture2.jpg")
+            ).children[0].children[0].children[0].children[0].children[2].children[0].src.includes("Picture2.jpg")
         ).toBe(true);
 
         expect(
             container.querySelector(
                 '#newsletter'
-            ).children[0].children[0].children[0].children[1].children[0].children[0].textContent
+            ).children[0].children[0].children[0].children[0].children[0].children[0].textContent
         ).toBe("Discover the Place");
 
         expect(
             container.querySelector(
                 '#newsletter'
-            ).children[0].children[0].children[0].children[1].children[0].children[1].textContent.includes("营地距多伦多240公里，距渥太华320公里")
+            ).children[0].children[0].children[0].children[0].children[0].children[1].textContent.includes("营地距多伦多240公里，距渥太华320公里")
         ).toBe(true);
 
         expect(
             container.querySelector(
                 '#newsletter'
-            ).children[0].children[0].children[0].children[1].children[0].children[2].children[0].textContent.includes("因此他们鼓励首次露营者的父母在允许的情况下尽可能自驾将孩子送到营地")
+            ).children[0].children[0].children[0].children[0].children[0].children[2].children[0].textContent.includes("因此他们鼓励首次露营者的父母在允许的情况下尽可能自驾将孩子送到营地")
         ).toBe(true);
     });
 
