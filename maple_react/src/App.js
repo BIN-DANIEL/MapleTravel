@@ -15,7 +15,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import ClassRoom from './pages/ClassRoom';
-
+import Healthy from './pages/Healthy';
 function App() {
 
   const location = useLocation();
@@ -53,6 +53,9 @@ function App() {
         </Route>
         <Route path="/classroom">
           <ClassRoom />
+        </Route>
+        <Route path="/healthy">
+          <Healthy/>
         </Route>
       </Switch>
     </>

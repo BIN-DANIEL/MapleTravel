@@ -29,9 +29,9 @@ function HeroHome() {
 
           {/* Section header */}
           <div className="text-center pb-12 md:pb-16">
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">ArrowHead<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400"> Camp</span></h1>
+            <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">Healthy<span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400"> Track+</span></h1>
             <div className="max-w-3xl mx-auto">
-              <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Arrowhead Camp相信营地体验能给每一位孩子带来影响深远的宝贵经验，他们的目标是为每一位露营者提供尽可能最好的机会来促进他们在一个欢快的环境中学习和成长</p>
+              <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Healthy Track+ engage empowers patients to actively participate in, and contribute to, their health record and care plans. Patients are encouraged to actively self-manage their well-being, with convenient ways to access their health information and interact with their care team</p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
                   <a className="btn text-white bg-gray-900 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href="#0">Learn more</a>

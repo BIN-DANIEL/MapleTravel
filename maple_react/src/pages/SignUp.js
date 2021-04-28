@@ -19,41 +19,52 @@ function SignUp() {
             //TODO: simple alert, modify it later
             alert("re-entered password doesn't match");
         }
-        $.ajax({
-            url: URLs.buildHasUserURL(username),
-            method: 'POST',
-            dataType: 'json',
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.log(errorThrown);
-            }
-        }).done((hasUser, textStatus, jqXHR)=>{
-            //return true or false
-            if (!hasUser) { // Means the provided username is valid
 
-                $.ajax({
-                    method: "POST",
-                    url: URLs.signUpURL,
-                    dataType: "json",
-                    contentType: "application/json",
-                    data: JSON.stringify({username: username, password: password}),
-                    error: (jqXHR, textStatus, errorThrown) => {
-                        console.log(errorThrown);
-                    }
-                }).done((data, textStatus, jqXHR)=>{
-                    if (data.regSuccess) {
-                        alert("Register Successfully");
-                        //TODO: Display corresponding UI, simple alert here, modify later
-                    } else {
-                        alert("Register Failed");
-                        //TODO: Simple alert here, modify later
-                    }
-                });
+        
 
-            } else {
-                //TODO: simple alert, modify later
-                alert("Username already in user!");
-            }
-        });
+
+
+
+        // $.ajax({
+        //     url: URLs.buildHasUserURL(username),
+        //     method: 'POST',
+        //     dataType: 'json',
+        //     error: (jqXHR, textStatus, errorThrown) => {
+        //         console.log(errorThrown);
+        //     }
+        // }).done((hasUser, textStatus, jqXHR)=>{
+        //     //return true or false
+        //     if (!hasUser) { // Means the provided username is valid
+
+        //         $.ajax({
+        //             method: "POST",
+        //             url: URLs.signUpURL,
+        //             dataType: "json",
+        //             contentType: "application/json",
+        //             data: JSON.stringify({username: username, password: password}),
+        //             error: (jqXHR, textStatus, errorThrown) => {
+        //                 console.log(errorThrown);
+        //             }
+        //         }).done((data, textStatus, jqXHR)=>{
+        //             if (data.regSuccess) {
+        //                 alert("Register Successfully");
+        //                 //TODO: Display corresponding UI, simple alert here, modify later
+        //             } else {
+        //                 alert("Register Failed");
+        //                 //TODO: Simple alert here, modify later
+        //             }
+        //         });
+
+        //     } else {
+        //         //TODO: simple alert, modify later
+        //         alert("Username already in user!");
+        //     }
+        
+        
+        
+        
+        
+        // });
       }
 
   return (
@@ -79,7 +90,7 @@ function SignUp() {
                 <form>
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">UserName <span className="text-red-600">*</span></label>
+                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">Email <span className="text-red-600">*</span></label>
                       <input id="username" type="email" className="form-input w-full text-gray-800" placeholder="Enter your name" required />
                     </div>
                   </div>                  
@@ -111,7 +122,7 @@ function SignUp() {
                 </div>
                 
                 <div className="text-gray-600 text-center mt-6">
-                  Already using Maple Travel? <Link to="/signin" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Sign in</Link>
+                  Already using Healthy Track? <Link to="/signin" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Sign in</Link>
                 </div>
               </div>
 

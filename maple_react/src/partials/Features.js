@@ -30,10 +30,8 @@ function Features() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4">Explore the Activities</h1>
-            <p className="text-xl text-gray-600">在露营期间，Arrowhead Camp会确保露营者在安全和积极的环境中体验各种活动。共同参加年龄特定的活动小组（一组约14名露营者），营员会作为一个团体的部分来学习和成长。在每项活动中，营员都将因为个人条件不同而得到一对一的针对性指导。不包括我们的带队老师，师生比1：3。
-                                                  安全是所有活动的关键部分。通过与营员合作，Arrowhead Camp建立坚实的知识库，了解所有进行的活动，以确保这些活动都尽可能安全。在所有划船活动中，露营者和工作人员必须佩戴个人浮选装置（PFD）或救生衣。营地为所有露营者提供安全的PFD和救生衣。
-                                                  Arrowhead Camp所有的员工都经过培训，以提供高质量、安全和有趣的计划。</p>
+            <h1 className="h2 mb-4">Explore the Platform</h1>
+            <p className="text-xl text-gray-600">Healthy Track+ is fed by real-time data from the Amadeus platform, Engage integrates with Coordinate, to support and enhance patient self-management. Patients can view their complete holistic health record, either from their home computer, tablet, or mobile phone. Engage enables the patient’s care team to support the patient, with access to documentation, wellness goals, a health library, medication lists, laboratory results, and more, all from a single, easy-to-access source of truth.</p>
           </div>
 
           {/* Section content */}
@@ -42,8 +40,8 @@ function Features() {
             {/* Content */}
             <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                <h3 className="h3 mb-3">水上活动和陆地活动</h3>
-                <p className="text-xl text-gray-600">种类较多，以下仅列举特色活动</p>
+                <h3 className="h3 mb-3">Health Info</h3>
+                <p className="text-xl text-gray-600">Through leveraging aggregate data sources, patients, clinicians, and care providers have instant, anytime access to a patient’s health record. Using responsive web technology, fed by real-time data from the Health platform, Engage integrates with Healthy Track, to support and enhance patient self-management.</p>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
@@ -53,7 +51,7 @@ function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(1); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">皮划艇/独木舟</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Covid Info</div>
                     <div className="text-gray-600"></div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -68,7 +66,7 @@ function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(2); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">射箭运动</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Health Summary</div>
                     <div className="text-gray-600"></div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -83,7 +81,7 @@ function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(3); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">尾浪滑水</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Find Closest Clinic</div>
                     <div className="text-gray-600"></div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -111,7 +109,11 @@ function Features() {
                   leaveEnd="opacity-0 -translate-y-16"
                 >
                   <div className="relative inline-flex flex-col">
-                    <img className="md:max-w-none mx-auto rounded" src={require('../images/act_1.jpg')} width="500" height="462" alt="Features bg" />
+                    {/*<img className="md:max-w-none mx-auto rounded" src={require('../images/act_1.jpg')} width="500" height="462" alt="Features bg" /> */}
+                    <iframe src="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&zoomToSelection=true&time=2020-03-20&region=NorthAmerica&hideControls=true&Metric=Confirmed+cases&Interval=Cumulative&Relative+to+Population=false&Align+outbreaks=false&country=~OWID_WRL" loading="lazy" width= "500" heigh= "44" ></iframe>
+                    <iframe src="https://ourworldindata.org/explorers/coronavirus-data-explorer?tab=map&zoomToSelection=true&region=NorthAmerica&hideControls=true&Metric=Confirmed+cases&Interval=Cumulative&Relative+to+Population=false&Align+outbreaks=false&country=~OWID_WRL" loading="lazy" width= "100%" height= "600" ></iframe>
+
+
                     {/* <img className="md:max-w-none absolute w-full left-0 transform animate-float" src={require('../images/features-element.png')} width="500" height="44" alt="Element" style={{ top: '30%' }} /> */}
                   </div>
                 </Transition>
@@ -128,7 +130,9 @@ function Features() {
                   leaveEnd="opacity-0 -translate-y-16"
                 >
                   <div className="relative inline-flex flex-col">
-                    <img className="md:max-w-none mx-auto rounded" src={require('../images/act_3.jpg')} width="500" height="462" alt="Features bg" />
+                    {/*<img className="md:max-w-none mx-auto rounded" src={require('../images/act_3.jpg')} width="500" height="462" alt="Features bg" />*/}
+                    
+                    
                     {/* <img className="md:max-w-none absolute w-full left-0 transform animate-float" src={require('../images/features-element.png')} width="500" height="44" alt="Element" style={{ top: '30%' }} /> */}
                   </div>
                 </Transition>
@@ -145,8 +149,8 @@ function Features() {
                   leaveEnd="opacity-0 -translate-y-16"
                 >
                   <div className="relative inline-flex flex-col">
-                    <img className="md:max-w-none mx-auto rounded" src={require('../images/act_4.jpg')} width="500" height="462" alt="Features bg" />
-                    {/* <img className="md:max-w-none absolute w-full left-0 transform animate-float" src={require('../images/features-element.png')} width="500" height="44" alt="Element" style={{ top: '30%' }} /> */}
+                  <iframe src="https://www.google.com/maps/d/embed?mid=1GSNPgFNpdR8RmyeKU_HGvCwr4EI" width="500" height="462"></iframe>
+                  {/* <img className="md:max-w-none absolute w-full left-0 transform animate-float" src={require('../images/features-element.png')} width="500" height="44" alt="Element" style={{ top: '30%' }} /> */}
                   </div>
                 </Transition>
               </div>

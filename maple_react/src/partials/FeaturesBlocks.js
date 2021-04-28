@@ -13,8 +13,8 @@ function FeaturesBlocks() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600">Feel free to ask more questions by contacting us or post your question on discussion</p>
+            <h2 className="h2 mb-4">Health Service Recommendation</h2>
+            <p className="text-xl text-gray-600">Find out the necessary and affordable medical service for you and your health</p>
           </div>
 
           {/* Items */}
@@ -49,8 +49,10 @@ function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">What is your Camper to Staff ratio?</h4>
-              <p className="text-gray-600 text-center">For every 3 campers at camp we have 1 staff member. This ratio does not include our kitchen staff. During Junior Camp we provide a 2:1 ratio.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">How effective will the vaccine be against COVID-19, and for how long?</h4>
+              <p className="text-gray-600 text-center">All vaccines currently authorized for use in the US are highly effective at protecting against severe COVID-19 that can lead to hospitalization and death. At this time, experts do not know how long protection will last or whether a booster shot will be necessary later, after the initial recommended vaccine dose(s). CDC and DSHS will keep the public informed as they learn more.
+
+              To learn about efficacy rates for specific vaccines</p>
             </div>
 
             {/* 3rd item */}
@@ -64,8 +66,8 @@ function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">What is the closest town?</h4>
-              <p className="text-gray-600 text-center">Arrowhead Camp is located just 5 minutes from the town of Dwight and 15 minutes from Huntsville.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Who is at risk for infection with SARS-Cov-2, the virus that causes COVID-19</h4>
+              <p className="text-gray-600 text-center">Currently, those at greatest risk of infection are persons who have had prolonged, unprotected close contact (i.e., within 6 feet for 15 minutes or longer) with a patient with confirmed SARS-CoV-2 infection, regardless of whether the patient has symptoms. Persons frequently in congregate settings see Risk Assessment and Your Health.</p>
             </div>
 
             {/* 4th item */}
@@ -81,8 +83,8 @@ function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>              
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Do campers need to sign up for their daily activities?</h4>
-              <p className="text-gray-600 text-center">Short answer is no. All of our campers get to experience all of the activities that we have to offer. Campers travel in activity groups that are age specific and co-ed.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Who is at risk for severe COVID-19?</h4>
+              <p className="text-gray-600 text-center">COVID-19 is a new disease and CDC is learning more about it every day. Among adults, the risk for severe illness from COVID-19 increases with age, with older adults at highest risk. Severe illness means that the person with COVID-19 may require hospitalization, intensive care, or a ventilator to help them breathe, or they may even die. People of any age with certain underlying medical conditions are also at increased risk for severe illness from SARS-CoV-2 infection.</p>
             </div>
 
             {/* 5th item */}
@@ -113,8 +115,12 @@ function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Does camp have a sky diving program?</h4>
-              <p className="text-gray-600 text-center">Sadly no.</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">What treated recommended for COVID-19 Kids?</h4>
+              <p className="text-gray-600 text-center">Not all patients with COVID-19 will require medical supportive care. Clinical management for hospitalized patients with COVID-19 is focused on supportive care for complications, including supplemental oxygen and advanced organ support for respiratory failure, septic shock, and multi-organ failure. Empiric testing and treatment for other viral or bacterial etiologies may be warranted.
+
+              The National Institutes of Health has published interim guidelines for the medical management of COVID-19external icon prepared by the COVID-19 Treatment Guidelines Panel.
+              
+              For information on investigational therapies, see Therapeutic Options for Patients with COVID-19.</p>
             </div>
 
           </div>

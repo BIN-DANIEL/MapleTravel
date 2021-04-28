@@ -36,13 +36,16 @@ function Header() {
             </Link>          
 
           </div>
-          <h1>Maple travel & Learn +</h1>
+          <h1>Healthy Track+</h1>
 
           {/* Site navigation */}
           <nav className="flex flex-grow">
             <ul className="flex flex-grow justify-end flex-wrap items-center">
             <li id = "cllinks">
-                <Link to="/classroom" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Class Room</Link>
+                <Link to="/healthy" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Healty Today?</Link>
+              </li>
+            <li id = "cllinks">
+                <Link to="/classroom" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Talk to Doctor</Link>
               </li>
               <li id = "silinks">
                 <Link to="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>

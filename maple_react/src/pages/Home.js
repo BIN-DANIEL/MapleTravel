@@ -23,8 +23,8 @@ function Home() {
         <HeroHome />
         <FeaturesHome />
         <FeaturesBlocks />
-        <Testimonials />
-        <Newsletter />
+        {/*<Testimonials /> */}
+        {/*<Newsletter />*/}
 
       </main>
 
